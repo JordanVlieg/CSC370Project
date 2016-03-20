@@ -10,7 +10,7 @@ primary key(acode)
 create table routes(
 rnum int,
 planemodel int,
-routetype ENUM("outgoing", "incoming") NOT NULL,
+routetype varchar(10) NOT NULL CHECK (routetype IN("outgoing", "incoming")),
 primary key(rnum)
 );
 
@@ -26,7 +26,7 @@ foreign key(acode) references airlines
 create table outgoingRoutes(
 destination varchar(100),
 outT date,
-routetype ENUM("outgoing") NOT NULL,
+routetype varchar(10) NOT NULL CHECK (routetype IN("outgoing")),
 rnum int NOT NULL,
 primary key(rum),
 foreign key(rnum, routetype) references routes(rnum, routetype)
@@ -35,7 +35,7 @@ foreign key(rnum, routetype) references routes(rnum, routetype)
 create table incomingRoutes(
 source varchar(100),
 incT date,
-routetype ENUM("incoming") NOT NULL,
+routetype varchar(10) NOT NULL CHECK (routetype IN("incoming")),
 rnum int NOT NULL,
 primary key(rum),
 foreign key(rnum, routetype) references routes(rnum, routetype)
@@ -64,7 +64,8 @@ CREATE TABLE Passengers
   name VARCHAR(100),
   gov_issued_id int,
   dob DATE,
-  pob VARCHAR
+  pob VARCHAR,
+  primary key(pID)
 );
 
 CREATE TABLE Baggage
