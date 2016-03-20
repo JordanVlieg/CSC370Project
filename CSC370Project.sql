@@ -10,12 +10,13 @@ primary key(acode)
 create table routes(
 rnum int,
 planemodel int,
+routetype ENUM("outgoing", "incoming") NOT NULL,
 primary key(rnum)
 );
 
 /* weak entity set */
 create table operates(
-rnum int,
+rnum int NOT NULL,
 acode int,
 primary key(rnum, acode),
 foreign key(rnum) references routes,
@@ -25,13 +26,19 @@ foreign key(acode) references airlines
 create table outgoingRoutes(
 destination varchar(100),
 outT date,
-rnum int primary key
+routetype ENUM("outgoing") NOT NULL,
+rnum int NOT NULL,
+primary key(rum),
+foreign key(rnum, routetype) references routes(rnum, routetype)
 );
 
 create table incomingRoutes(
 source varchar(100),
 incT date,
-rnum int primary key
+routetype ENUM("incoming") NOT NULL,
+rnum int NOT NULL,
+primary key(rum),
+foreign key(rnum, routetype) references routes(rnum, routetype)
 
 );
 
