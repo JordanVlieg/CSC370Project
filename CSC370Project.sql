@@ -4,7 +4,8 @@ create table airlines (
 acode int NOT NULL AUTOINCREMENT,
 name varchar(100),
 website varchar(100),
-primary key(acode)
+primary key(acode),
+unique(acode,name,website)
 );
 
 create table routes(
@@ -77,5 +78,5 @@ CREATE TABLE Baggage
   bID int NOT NULL AUTOINCREMENT,
   weightKG int,
   primary key(bID),
-  pID int REFERENCES Passengers(pID)
+  pID int REFERENCES Passengers(pID) not null
 );
