@@ -1,15 +1,16 @@
 /* on delete cascade */
 
 create table airlines (
-acode int,
-name varchar(100),
+acode int not null,
+name varchar(100) not null,
 website varchar(100),
-primary key(acode)
+primary key(acode),
+unique(acode,name,website)
 );
 
 create table routes(
-rnum int,
-planemodel int,
+rnum int not null,
+planemodel int unique,
 routetype varchar(10) NOT NULL CHECK (routetype IN("outgoing", "incoming")),
 primary key(rnum)
 );
@@ -73,5 +74,5 @@ CREATE TABLE Baggage
   bID int,
   weightKG int,
   primary key(bID),
-  pID int REFERENCES Passengers(pID)
+  pID int REFERENCES Passengers(pID) not null
 );
